@@ -1,6 +1,8 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min'; // Importa el JavaScript de Bootstrap
 import { FaShoppingCart, FaBell, FaUserCircle } from 'react-icons/fa'; // Para iconos
+import { SiAmazonluna } from 'react-icons/si'; // Para iconos
 
 const Navbar = () => {
   return (
@@ -8,12 +10,11 @@ const Navbar = () => {
       <div className="container-fluid">
         {/* Botón de hamburguesa */}
         <button
-          className="navbar-toggler"
+          className="navbar-toggler d-lg-none"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNav"
           aria-controls="navbarNav"
-          aria-expanded="false"
           aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon"></span>
@@ -21,7 +22,6 @@ const Navbar = () => {
 
         {/* Enlaces de la barra de navegación */}
         <div className="collapse navbar-collapse" id="navbarNav">
-          <a className="navbar-brand" href="#">Agenda</a>
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <a className="nav-link" href="#">Añadir Contacto</a>
@@ -35,14 +35,14 @@ const Navbar = () => {
           </ul>
         </div>
 
+        {/* Título centrado */}
+        <a className="navbar-brand position-absolute start-50 translate-middle-x" href="#">Agenda <SiAmazonluna /></a>
+
         {/* Elementos a la derecha */}
-        <div className="d-flex align-items-center">
-
-
+        <div className="d-flex align-items-center ms-auto">
           {/* Avatar */}
           <div className="dropdown">
-            <a
-            >
+            <a>
               <FaUserCircle className="rounded-circle" size={25} />
             </a>
           </div>
