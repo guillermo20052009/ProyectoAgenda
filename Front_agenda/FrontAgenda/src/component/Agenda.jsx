@@ -36,7 +36,7 @@ function Agenda() {
   ));
 
 return (
-    <div className="container bg-dark text-white min-vh-100">
+    <div className="container bg-dark text-white min-vh-100" style={{ fontFamily: 'Cursive' }}>
         <Navbar />
         <div className="row justify-content-center">
             {cards}

@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min'; // Importa el JavaScript de Bootstrap
 import { FaShoppingCart, FaBell, FaUserCircle } from 'react-icons/fa'; // Para iconos
 import { SiAmazonluna } from 'react-icons/si'; // Para iconos
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
@@ -24,19 +25,22 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link" href="#">Añadir Contacto</a>
+              <Link to="/Añadir" className='nav-link'>Añadir Contacto</Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">Editar contacto</a>
+            <Link to="/Editar" className='nav-link'>Editar Contacto</Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">Eliminar contacto</a>
+            <Link to="/Eliminar" className='nav-link'>Eliminar Contacto</Link>
+            </li>
+            <li>
+            <Link to="/Tutoriales" className='nav-link'>Ver Tutoriales</Link>
             </li>
           </ul>
         </div>
 
         {/* Título centrado */}
-        <a className="navbar-brand position-absolute start-50 translate-middle-x" href="#">Agenda <SiAmazonluna /></a>
+        <Link to="/" className='navbar-brand position-absolute start-50 translate-middle-x'>Agenda <SiAmazonluna ></SiAmazonluna></Link>
 
         {/* Elementos a la derecha */}
         <div className="d-flex align-items-center ms-auto">
