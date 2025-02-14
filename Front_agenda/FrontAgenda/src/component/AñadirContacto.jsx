@@ -1,10 +1,13 @@
 import React from 'react'
 import { SiAmazonluna } from 'react-icons/si'; // Para iconos
+import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from './BarraSuperior';
 import { useState } from 'react';
 import AgendaDataService from '../services/agenda.service';
+import './componentes.css'
 function AñadirContacto() {
     const [dni, setDni] = useState('');
+    const navigate = useNavigate();
     const [nombre, setNombre] = useState('');
     const [apellido, setApellido] = useState('');
     const [edad, setEdad] = useState('');
@@ -40,11 +43,8 @@ function AñadirContacto() {
           alert('Contacto agregado con éxito');
           
           // Limpia el formulario si lo deseas
-          setDni('');
-          setNombre('');
-          setApellido('');
-          setEdad('');
-          setTelefono('');
+        
+          navigate('/');
         } catch (error) {
           // Maneja cualquier error
           console.error('Error al agregar contacto:', error);
@@ -53,7 +53,7 @@ function AñadirContacto() {
       };
       
 return (
-    <div className="container bg-dark text-light" style={{ fontFamily: 'Cursive' }}>
+    <div className="container color1 text-light" style={{ fontFamily: 'Cursive' }}>
             <Navbar />
         <h2 className="mb-4 mt-5 text-center">Añadir Contacto</h2>
         <form>
@@ -76,7 +76,7 @@ return (
             ))}
 
             <div className="text-center">
-                <button type="submit" className="btn btn-dark px-4" onClick={handleSubmit}>
+                <button type="submit" className="btn color3 px-4 text-white mt-5" onClick={handleSubmit}>
                     Enviar
                 </button>
             </div>
