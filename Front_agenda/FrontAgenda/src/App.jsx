@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-ro
 import AñadirContacto from './component/AñadirContacto';
 import Navbar from './component/BarraSuperior';
 import EditarContacto from './component/EditarContacto';
+import Principal from './component/Principal';
 function App() {
 
   return(
@@ -15,6 +16,7 @@ function App() {
       <Routes>
     {/* Componente que define qué componente se renderiza para cada ruta.*/}
     <Route path="/" element={<Navigate to={"/Agenda"} ></Navigate>} />
+    <Route path="/Principal" element={<Principal></Principal>} />
     <Route path="/Agenda" element={<Agenda></Agenda>} />
     <Route path="/Añadir" element={<AñadirContacto></AñadirContacto>} />
     <Route path="contacts/:dni" element={<EditarContacto></EditarContacto>} />
