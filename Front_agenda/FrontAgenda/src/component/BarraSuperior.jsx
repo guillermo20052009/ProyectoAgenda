@@ -49,13 +49,13 @@ const Navbar = (props) => {
               <Link to="/Agenda" className='nav-link text-white' onClick={handleDelete}>Eliminar Contacto</Link>
             </li>
             <li className='nav-item'>
-              <Link to="/Tutoriales" className='nav-link text-white'>Ver Tutoriales</Link>
+              <Link to={"/tutoriales/" + props.dni} className='nav-link text-white'>Ver Tutoriales</Link>
             </li>
           </ul>
         </div>
 
         {/* Título centrado */}
-        <Link to="/" className='text-white navbar-brand position-absolute start-50 translate-middle-x'>Agenda <SiAmazonluna ></SiAmazonluna></Link>
+        <Link to="/Agenda" className='text-white navbar-brand position-absolute start-50 translate-middle-x'>Agenda <SiAmazonluna ></SiAmazonluna></Link>
 
         {/* Elementos a la derecha */}
         <div className="d-flex align-items-center ms-auto">

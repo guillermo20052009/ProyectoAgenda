@@ -8,6 +8,7 @@ import Agenda from './component/Agenda';
 import Registro from './component/Registro';
 import AñadirContacto from './component/AñadirContacto';
 import EditarContacto from './component/EditarContacto';
+import Tutoriales from './component/Tutoriales';
 
 function App() {
   const [userInfo, setUserInfo] = useState({
@@ -24,6 +25,7 @@ function App() {
           <Route path="/Registro" element={<Registro />} />
           <Route path="/Agenda" element={<Agenda />} />
           <Route path="/Añadir" element={<AñadirContacto />} />
+          <Route path="/tutoriales/:dni" element={<Tutoriales></Tutoriales>} />
           <Route path="contacts/:dni" element={<EditarContacto />} />
         </Routes>
       </Router>

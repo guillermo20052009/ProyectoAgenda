@@ -44,7 +44,7 @@ function AñadirContacto() {
           
           // Limpia el formulario si lo deseas
         
-          navigate('/');
+          navigate('/Agenda');
         } catch (error) {
           // Maneja cualquier error
           console.error('Error al agregar contacto:', error);
