@@ -1,29 +1,33 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { MiContexto } from './context/UserContext'; // Importa el contexto
 import 'bootstrap/dist/css/bootstrap.min.css'; // Importa el CSS de Bootstrap
 import './App.css';
-import Agenda from './component/Agenda'; // Importa el componente Agenda
-import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom';
-import AñadirContacto from './component/AñadirContacto';
-import Navbar from './component/BarraSuperior';
-import EditarContacto from './component/EditarContacto';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Principal from './component/Principal';
+import Agenda from './component/Agenda';
+import Registro from './component/Registro';
+import AñadirContacto from './component/AñadirContacto';
+import EditarContacto from './component/EditarContacto';
+
 function App() {
+  const [userInfo, setUserInfo] = useState({
+    name: '',
+    photoUrl: ''
+  });
 
-  return(
-    <Router>
-
-      
-      <Routes>
-    {/* Componente que define qué componente se renderiza para cada ruta.*/}
-    <Route path="/" element={<Navigate to={"/Agenda"} ></Navigate>} />
-    <Route path="/Principal" element={<Principal></Principal>} />
-    <Route path="/Agenda" element={<Agenda></Agenda>} />
-    <Route path="/Añadir" element={<AñadirContacto></AñadirContacto>} />
-    <Route path="contacts/:dni" element={<EditarContacto></EditarContacto>} />
-    <Route path="/Tutoriales" element={<h1>Tutoriales</h1>} />
-    </Routes>
-  </Router>
-   
+  return (
+    <MiContexto.Provider value={{ userInfo, setUserInfo }}>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Navigate to="/Principal" />} />
+          <Route path="/Principal" element={<Principal />} />
+          <Route path="/Registro" element={<Registro />} />
+          <Route path="/Agenda" element={<Agenda />} />
+          <Route path="/Añadir" element={<AñadirContacto />} />
+          <Route path="contacts/:dni" element={<EditarContacto />} />
+        </Routes>
+      </Router>
+    </MiContexto.Provider>
   );
 }
 

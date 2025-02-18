@@ -14,7 +14,7 @@ const Navbar = (props) => {
     try {
       await AgendaDataService.delete(props.dni);
       alert('Contacto eliminado con éxito');
-      navigate('/');
+      props.eliminar(props.dni);
     } catch (error) {
       console.error('Error al eliminar contacto:', error);
       alert('Error al eliminar contacto');
