@@ -41,13 +41,20 @@ function Agenda() {
   };
 
   const handleDelete = () => {
-    try {
-      setAgenda(agenda.filter(contacto => contacto.dni !== props.dni));
-    } catch (error) {
-      console.error('Error al eliminar contacto:', error);
-      alert('Error al eliminar contacto');
+    if (!selectedDni) {
+      alert('No hay contacto seleccionado para eliminar');
+      return;
     }
+      try{
+        setAgenda(agenda.filter(contacto => contacto.dni !== selectedDni));
+        setSelectedDni(null); // Desseleccionar la carta eliminada
+        setContactoSeleccionado(null); // Limpiar los detalles del contacto
+      } catch{(error => {
+        console.error('Error al eliminar contacto:', error);
+        alert('Error al eliminar contacto');
+      });
   };
+}
 
   const cards = agenda.map((contacto, index) => (
     <div className="col-md-3 my-3" key={index}>
