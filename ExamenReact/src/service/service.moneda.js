@@ -1,6 +1,6 @@
 import http from "../http_common";
 
-class ProductsDataService {
+class MonedaDataService {
   getAll() {
     return http.get("/products");
   }
@@ -27,4 +27,4 @@ class ProductsDataService {
   }
 }
 
-export default new ProductsDataService();
+export default new MonedaDataService();

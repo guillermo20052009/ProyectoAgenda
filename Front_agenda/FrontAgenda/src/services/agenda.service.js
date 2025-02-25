@@ -14,6 +14,7 @@ class AgendaDataService {
   }
 
   update(id, data) {
+    console.log('data:', data);
     return http.put(`/contacts/${id}`, data);
   }
 

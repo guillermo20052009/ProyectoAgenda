@@ -53,6 +53,7 @@ public class AgendaServiceImpl implements AgendaService {
             existingAgenda.setTelefono(agendaDto.getTelefono());
             existingAgenda.setApellido(agendaDto.getApellido());
             existingAgenda.setApellido(agendaDto.getApellido());
+            existingAgenda.setTutoriales(agendaDto.getTutoriales());
 
             Agendas updatedAgenda = agendaRepository.save(existingAgenda);
             return AgendaMapper.agendaMapperEntityToDto(updatedAgenda);

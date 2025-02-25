@@ -13,6 +13,7 @@ public class Agendas {
     private String apellido;
     private int edad;
     private String telefono;
+    private String tutoriales[];
 
 }
 

@@ -2,13 +2,13 @@ import React, { useState, useEffect, useContext } from 'react';
 import AgendaDataService from '../services/agenda.service';
 import Navbar from './BarraSuperior';
 import './componentes.css';
-import { MiContexto } from '../context/UserContext.jsx';
+import { ContactContext } from '../context/UserContext';
 
 function Agenda() {
   const [agenda, setAgenda] = useState([]);
   const [selectedDni, setSelectedDni] = useState(null);
   const [contactoSeleccionado, setContactoSeleccionado] = useState(null);
-  const { userInfo } = useContext(MiContexto);
+  const { userInfo } = useContext(ContactContext);
 
   useEffect(() => {
     console.log(userInfo);

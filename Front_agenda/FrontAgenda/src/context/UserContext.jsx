@@ -1,4 +1,26 @@
-// MiContexto.js (puedes crear un archivo de contexto si prefieres)
-import { createContext } from 'react';
+import { createContext, useState, useEffect } from 'react';
 
-export const MiContexto = createContext();
+// Crear el contexto
+export const ContactContext = createContext();
+
+// Proveedor del contexto
+export function ContactProvider({ children }) {
+    // Recuperar datos de localStorage si existen
+    const storedUserInfo = JSON.parse(localStorage.getItem('userInfo')) || {
+        name: '',
+        photoUrl: '',
+    };
+
+    const [userInfo, setUserInfo] = useState(storedUserInfo);
+
+    // Guardar en localStorage cada vez que `userInfo` cambie
+    useEffect(() => {
+        localStorage.setItem('userInfo', JSON.stringify(userInfo));
+    }, [userInfo]);
+
+    return (
+        <ContactContext.Provider value={{ userInfo, setUserInfo }}>
+            {children}
+        </ContactContext.Provider>
+    );
+}

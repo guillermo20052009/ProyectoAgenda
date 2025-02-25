@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MiContexto } from './context/UserContext'; // Importa el contexto
+import { ContactProvider } from './context/UserContext';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Importa el CSS de Bootstrap
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
@@ -11,13 +11,10 @@ import EditarContacto from './component/EditarContacto';
 import Tutoriales from './component/Tutoriales';
 
 function App() {
-  const [userInfo, setUserInfo] = useState({
-    name: '',
-    photoUrl: ''
-  });
+ 
 
   return (
-    <MiContexto.Provider value={{ userInfo, setUserInfo }}>
+    <ContactProvider>
       <Router>
         <Routes>
           <Route path="/" element={<Navigate to="/Principal" />} />
@@ -29,7 +26,7 @@ function App() {
           <Route path="contacts/:dni" element={<EditarContacto />} />
         </Routes>
       </Router>
-    </MiContexto.Provider>
+    </ContactProvider>
   );
 }
 

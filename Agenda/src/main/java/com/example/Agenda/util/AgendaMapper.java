@@ -15,6 +15,7 @@ public class AgendaMapper {
                 .apellido(agendaDto.getApellido())
                 .edad(agendaDto.getEdad())
                 .telefono(agendaDto.getTelefono())
+                .tutoriales(agendaDto.getTutoriales())
                 .build();
     }
 
@@ -27,6 +28,7 @@ public class AgendaMapper {
                 .apellido(agenda.getApellido())
                 .edad(agenda.getEdad())
                 .telefono(agenda.getTelefono())
+                .tutoriales(agenda.getTutoriales())
                 .build();
     }
 

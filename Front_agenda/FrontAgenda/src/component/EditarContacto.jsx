@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { SiAmazonluna } from 'react-icons/si'; // Para iconos
 import Navbar from './BarraSuperior';
 import AgendaDataService from '../services/agenda.service';
+import TutorialDataService from '../services/tutorial.Service';
 
 function EditarContacto() {
   const { dni } = useParams();
@@ -11,6 +12,8 @@ function EditarContacto() {
   const [apellido, setApellido] = useState('');
   const [edad, setEdad] = useState('');
   const [telefono, setTelefono] = useState('');
+  const [tutoriales, setTutoriales] = useState([]);
+  const [selectedTutorials, setSelectedTutorials] = useState([]);
 
   useEffect(() => {
     if (dni) {
@@ -21,12 +24,27 @@ function EditarContacto() {
           setApellido(contact.apellido);
           setEdad(contact.edad);
           setTelefono(contact.telefono);
+          setSelectedTutorials(contact.tutoriales || []);
         })
         .catch(e => {
           console.log(e);
         });
+      retrieveTutorials();
     }
   }, [dni]);
+
+  const retrieveTutorials = () => {
+    TutorialDataService.getAll()
+      .then((response) => {
+        setTutoriales(response.data);
+      })
+      .catch(error => console.error('Error al obtener tutoriales:', error));
+  };
+
+  const handleTutorialChange = (e) => {
+    const options = Array.from(e.target.selectedOptions, option => option.value);
+    setSelectedTutorials(options);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,11 +59,12 @@ function EditarContacto() {
 
     // Crea el objeto con los datos del formulario
     const contactData = {
-      dni: dni,
+      dni,
       name: nombre,
-      apellido: apellido,
-      edad: edad,
-      telefono: telefono,
+      apellido,
+      edad,
+      telefono,
+      tutoriales: selectedTutorials
     };
 
     try {
@@ -56,7 +75,7 @@ function EditarContacto() {
       alert('Contacto actualizado con éxito');
       
       // Navega a la ruta base
-      navigate('/');
+      navigate('/Agenda');
     } catch (error) {
       // Maneja cualquier error
       console.error('Error al actualizar contacto:', error);
@@ -86,6 +105,20 @@ function EditarContacto() {
             />
           </div>
         ))}
+        {/* Spinner para seleccionar múltiples tutoriales */}
+        <div className="mb-3 w-75 mx-auto">
+          <label className="form-label">Seleccionar Tutorial(es)</label>
+          <select
+            className="form-control border-0 border-bottom bg-transparent text-light"
+            multiple
+            value={selectedTutorials}
+            onChange={handleTutorialChange}
+          >
+            {tutoriales.map((tutorial) => (
+              <option key={tutorial.id} value={tutorial.title} className='text-white'>{tutorial.title}</option>
+            ))}
+          </select>
+        </div>
 
         <div className="text-center">
           <button type="submit" className="btn color3 text-white mt-5 px-4" onClick={handleSubmit}>

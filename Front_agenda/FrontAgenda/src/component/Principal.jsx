@@ -6,7 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { auth, firestore } from "../firebase.js";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { collection, query, where, getDocs } from "firebase/firestore";
-import { MiContexto } from '../context/UserContext.jsx'; // Importa el contexto
+import { ContactContext } from '../context/UserContext';
+import Navbar from "./BarraSuperior.jsx";
 
 function Principal() {
   const [username, setUsername] = useState("");
@@ -15,7 +16,7 @@ function Principal() {
   const navigate = useNavigate();
 
   // Acceder al contexto
-  const { setUserInfo } = useContext(MiContexto); // Obtener la función para actualizar el contexto
+  const { setUserInfo } = useContext(ContactContext); // Obtener la función para actualizar el contexto
 
   // Función para manejar el inicio de sesión
   const handleLogin = async (event) => {
@@ -37,11 +38,7 @@ function Principal() {
       const userPhotoUrl = userData.photoURL; // Asegúrate de que estos campos estén en Firestore
 
       // Actualizamos el contexto con los datos del usuario
-  
-      setUserInfo({
-        name: userName,
-        photoUrl: userPhotoUrl
-      });
+      usuarios(userName, userPhotoUrl);
 
       // Autenticación con Firebase
       const fakeEmail = `${username}@fakeemail.com`;
@@ -53,8 +50,15 @@ function Principal() {
       setError("Error al iniciar sesión: " + error.message);
     }
   };
+  const usuarios = (userName,userPhotoUrl) => {
+    setUserInfo({
+      name: userName,
+      photoUrl: userPhotoUrl
+    });
+  };
 
   return (
+    <>
     <div
       className="vh-100 vw-100 d-flex justify-content-center align-items-center text-white"
       style={{
@@ -115,6 +119,7 @@ function Principal() {
         </form>
       </div>
     </div>
+    </>
   );
 }
 
