@@ -41,20 +41,28 @@ const Navbar = (props) => {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
-              <Link to="/Añadir" className="nav-link text-white">Añadir Contacto</Link>
-            </li>
-            <li className="nav-item">
-              <Link to={`/contacts/${props.dni}`} className="nav-link text-white">Editar Contacto</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/Agenda" className="nav-link text-white" onClick={handleDelete}>Eliminar Contacto</Link>
-            </li>
-            <li className="nav-item">
-              <Link to={`/tutoriales/${props.dni}`} className="nav-link text-white">Ver Tutoriales</Link>
-            </li>
-          </ul>
+          {userInfo.name === "prueba" ? (
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className="nav-item">
+                <Link to="/Añadir" className="nav-link text-white">Añadir Contacto</Link>
+              </li>
+              <li className="nav-item">
+                <Link to={`/contacts/${props.dni}`} className="nav-link text-white">Editar Contacto</Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/Agenda" className="nav-link text-white" onClick={handleDelete}>Eliminar Contacto</Link>
+              </li>
+              <li className="nav-item">
+                <Link to={`/tutoriales/${props.dni}`} className="nav-link text-white">Ver Tutoriales</Link>
+              </li>
+            </ul>
+          ) : (
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className="nav-item">
+                <Link to={`/tutoriales/${props.dni}`} className="nav-link text-white">Ver Tutoriales</Link>
+              </li>
+            </ul>
+          )}
         </div>
 
         <Link to="/Agenda" className="text-white navbar-brand position-absolute start-50 translate-middle-x">
