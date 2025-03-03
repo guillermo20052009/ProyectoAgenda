@@ -1,0 +1,14 @@
+{
+    "hosting": {
+      "public": "build",
+      "site": "pruebalogin-c4a98-edab3",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  }
+  

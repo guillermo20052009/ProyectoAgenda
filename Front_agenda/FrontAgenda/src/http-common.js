@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "http://localhost:8090/Guillermo/Proyecto",
+  baseURL: "http://agenda.us-east-1.elasticbeanstalk.com:80/Guillermo/Proyecto",
   headers: {
     "Content-type": "application/json"
   }

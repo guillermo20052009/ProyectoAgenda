@@ -5,7 +5,7 @@ import Navbar from "./BarraSuperior";
 import TutorialDataService from "../services/tutorial.Service";
 import yes from "./Fotos/check.png";
 import no from "./Fotos/not.png";  
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import AgendaDataService from '../services/agenda.service';
 
 function Tutoriales() {
@@ -22,7 +22,7 @@ function Tutoriales() {
     if (tutorials.length > 0) {
       retrieve(dni);
     }
-  }, [tutorials]); // Ejecuta retrieve(dni) solo cuando tutorials está listo
+  }, [tutorials]); 
 
   const retrieveTutorials = () => {
     TutorialDataService.getAll()
@@ -42,7 +42,7 @@ function Tutoriales() {
           return;
         }
 
-        const tutorialesAgenda = response.data.tutoriales; // Lista de títulos de tutoriales
+        const tutorialesAgenda = response.data.tutoriales; 
         console.log("Tutoriales en la agenda:", tutorialesAgenda);
 
         const filtered = tutorials.filter(tutorial => 
@@ -63,44 +63,54 @@ function Tutoriales() {
 
   return (
     <>
-      <Navbar />
+      <Navbar comp={"tuto"} />
       <div className="container p-4 vh-100 color1">
         <h2 className="text-center text-white mb-4">Lista de Tutoriales</h2>
         <div className="list-group">
-          {filteredTutorials
-            .map((tutorial, index) => (
-              <div key={tutorial.id} className="mb-3">
-                <button
-                  className={`list-group-item list-group-item-action text-white fw-bold color2 ${
-                    openIndex === index ? "bg-secondary" : ""
-                  }`}
-                  onClick={() => toggleItem(index)}
-                >
-                  {tutorial.title}
-                </button>
-                {openIndex === index && (
-                  <div className="p-3 mt-2 rounded color3 fade-in">
-                    <p>{tutorial.description}</p>
-                    <p>
-                      Publicado:{" "}
-                      {tutorial.published ? (
-                        <img
-                          src={yes}
-                          alt="Publicado"
-                          style={{ width: "20px", height: "20px" }}
-                        />
-                      ) : (
-                        <img
-                          src={no}
-                          alt="No publicado"
-                          style={{ width: "20px", height: "20px" }}
-                        />
-                      )}
-                    </p>
-                  </div>
-                )}
-              </div>
-            ))}
+          {filteredTutorials.map((tutorial, index) => (
+            <div key={tutorial.id} className="mb-3">
+              <button
+                className={`list-group-item list-group-item-action text-white fw-bold color2 ${
+                  openIndex === index ? "bg-secondary" : ""
+                }`}
+                onClick={() => toggleItem(index)}
+              >
+                {tutorial.title}
+              </button>
+              {openIndex === index && (
+                <div className="p-3 mt-2 rounded color3 fade-in">
+                  <p>{tutorial.description}</p>
+                  <p>
+                    Publicado:{" "}
+                    {tutorial.published ? (
+                      <img
+                        src={yes}
+                        alt="Publicado"
+                        style={{ width: "20px", height: "20px" }}
+                      />
+                    ) : (
+                      <img
+                        src={no}
+                        alt="No publicado"
+                        style={{ width: "20px", height: "20px" }}
+                      />
+                    )}
+                  </p>
+                  {/* Imagen del tutorial */}
+                  {tutorial.url && (
+                    <div className=" mt-2">
+                      <img
+                        src={tutorial.url}
+                        alt={`Imagen de ${tutorial.title}`}
+                        className="img-fluid rounded"
+                        style={{ maxWidth: "100%", maxHeight: "200px" }}
+                      />
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          ))}
         </div>
       </div>
     </>

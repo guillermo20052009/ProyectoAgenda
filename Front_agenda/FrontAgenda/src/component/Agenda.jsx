@@ -3,12 +3,14 @@ import AgendaDataService from '../services/agenda.service';
 import Navbar from './BarraSuperior';
 import './componentes.css';
 import { ContactContext } from '../context/UserContext';
+import  BarraProgreso from './BarraProgreso';
 
 function Agenda() {
   const [agenda, setAgenda] = useState([]);
   const [selectedDni, setSelectedDni] = useState(null);
   const [contactoSeleccionado, setContactoSeleccionado] = useState(null);
   const { userInfo } = useContext(ContactContext);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     console.log(userInfo);
@@ -20,6 +22,7 @@ function Agenda() {
       .then(response => {
         setAgenda(response.data);
         console.log(response.data);
+        setProgress(response.data.length);
       })
       .catch(e => {
         console.log(e);
@@ -82,8 +85,9 @@ function Agenda() {
   ));
 
   return (
-    <div className="container color1 text-white min-vh-100" style={{ fontFamily: 'Cursive' }}>
-      <Navbar dni={selectedDni} eliminar={handleDelete} />
+    <div className="container color1 text-white min-vh-100 min-vw-100" style={{ fontFamily: 'Cursive' }}>
+      <Navbar dni={selectedDni} eliminar={handleDelete} progress={progress} comp={"princ"}/>
+      <BarraProgreso progress={progress} />
       <div className="row justify-content-center">
         {cards}
       </div>

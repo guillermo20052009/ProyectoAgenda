@@ -21,7 +21,7 @@ function AñadirContacto() {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        if (name === "Dni") setDni(value);
+        if (name === "Dni") setDni(value.toUpperCase()); // DNI en mayúsculas
         if (name === "Nombre") setNombre(value);
         if (name === "Apellido") setApellido(value);
         if (name === "edad") setEdad(value);
@@ -41,8 +41,38 @@ function AñadirContacto() {
         setSelectedTutorials(options);
     };
 
+    const validarDni = (dni) => {
+        const letras = "TRWAGMYFPDXBNJZSQVHLCKE";
+        const dniRegex = /^(\d{8})([A-Z])$/;
+
+        if (!dniRegex.test(dni)) return false; // Validar formato correcto (8 números + 1 letra)
+
+        const numero = dni.slice(0, 8);
+        const letra = dni.slice(8);
+        const letraCorrecta = letras[numero % 23];
+
+        return letra === letraCorrecta;
+    };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        // Validaciones
+        if (!dni || !nombre || !apellido || !edad || !telefono) {
+            alert("Todos los campos son obligatorios.");
+            return;
+        }
+
+        if (!validarDni(dni)) {
+            alert("El DNI introducido no es válido.");
+            return;
+        }
+
+        if (!/^\d{9}$/.test(telefono)) {
+            alert("El teléfono debe contener exactamente 9 dígitos.");
+            return;
+        }
+
         const contactData = {
             dni,
             name: nombre,
@@ -69,7 +99,7 @@ function AñadirContacto() {
             <form>
                 {[{ label: "Dni", name: "Dni", type: "text" },
                   { label: "Nombre", name: "Nombre", type: "text" },
-                  { label: "Apellido", name: "Apellido", type: "tel" },
+                  { label: "Apellido", name: "Apellido", type: "text" },
                   { label: "Edad", name: "edad", type: "number" },
                   { label: "Telefono", name: "Telefono", type: "text" }].map(({ label, name, type }) => (
                     <div className="mb-3 w-75 mx-auto" key={name}>
@@ -79,6 +109,7 @@ function AñadirContacto() {
                             name={name}
                             className="form-control border-0 border-bottom bg-transparent text-light"
                             onChange={handleChange}
+                            value={name === "Dni" ? dni : name === "Nombre" ? nombre : name === "Apellido" ? apellido : name === "edad" ? edad : telefono}
                         />
                     </div>
                 ))}

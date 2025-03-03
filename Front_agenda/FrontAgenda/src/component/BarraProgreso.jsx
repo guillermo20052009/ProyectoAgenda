@@ -1,29 +1,22 @@
+import { useState } from 'react';
 
-import { useContext } from 'react';
-import { ProgressContext } from '../Context/ProgressContext.jsx'; // Importar el contexto
+function BarraProgreso(props) {
+  const progressColor = props.progress < 5 ? 'bg-success' : 'bg-danger';
 
-function BarraProgreso() {
-  const { progress } = useContext(ProgressContext); // Usar el contexto
   return (
-    <div className="progress mt-5 ancho">
-    <div  
-        className="progress-bar progress-bar-striped progress-bar-animated bg-primary " 
+    <div className="progress mt-5 mb-5">
+      <div  
+        className={`progress-bar progress-bar-striped progress-bar-animated ${progressColor}`} 
         role="progressbar" 
-        style={{ width: `${progress}%` }}
-        aria-valuenow={progress} 
+        style={{ width: `${props.progress*20}%` }}
+        aria-valuenow={props.progress*20} 
         aria-valuemin="0" 
         aria-valuemax="100"
-    >
-     {progress < 100 ? (
-
-      `${progress}%`
-
-      ) : (
-            "100%"
-            )}
+      >
+        {props.progress < 100 ? `${props.progress*20}%` : "100%"}
+      </div>
     </div>
-</div>
-  )
+  );
 }
 
-export default BarraProgreso
+export default BarraProgreso;
